@@ -1,0 +1,33 @@
+{
+  "name": "react-component-benchmark",
+  "version": "0.0.0",
+  "description": "A component utility for estimating benchmarks of React components",
+  "main": "dist/index.js",
+  "author": "Paul Armstrong <paul@spaceyak.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^21.0.2",
+    "babel-preset-env": "^1.6.0",
+    "enzyme": "^2.9.1",
+    "flow-bin": "^0.55.0",
+    "flow-typed": "^2.1.5",
+    "husky": "^0.14.3",
+    "jest": "^21.1.0",
+    "lint-staged": "^4.2.2",
+    "prettier": "^1.7.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2"
+  },
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --single-quote --print-width=120",
+      "git add"
+    ]
+  }
+}
