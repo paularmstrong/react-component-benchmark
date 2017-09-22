@@ -8,26 +8,57 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^21.0.2",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx-self": "^6.22.0",
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
     "enzyme": "^2.9.1",
+    "enzyme-to-json": "^2.0.0",
     "flow-bin": "^0.55.0",
     "flow-typed": "^2.1.5",
     "husky": "^0.14.3",
     "jest": "^21.1.0",
     "lint-staged": "^4.2.2",
+    "mkdirp": "^0.5.1",
     "prettier": "^1.7.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "rollup": "^0.50.0",
-    "rollup-plugin-babel": "^3.0.2"
+    "react-test-renderer": "^15.6.1",
+    "rimraf": "^2.6.2"
   },
   "scripts": {
-    "precommit": "lint-staged"
+    "build": "cd src && babel *.js -d ../dist",
+    "clean": "rimraf dist",
+    "precommit": "lint-staged",
+    "test": "jest"
   },
   "lint-staged": {
     "*.js": [
       "prettier --write --single-quote --print-width=120",
       "git add"
     ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "name": "react-component-benchmark",
+    "resetMocks": true,
+    "rootDir": "src/",
+    "roots": [
+      "<rootDir>"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "testEnvironment": "jsdom",
+    "testRegex": "/__tests__/.*\\.test\\.js$",
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
   }
 }

@@ -1,18 +1,29 @@
 {
   "presets": [
+    "react",
     [ "env", {
         "targets": {
           "browsers": [
-            "Chrome >= 38"
-            "Firefox >= 38"
-            "Safari >= 7"
-            "iOS >= 7"
-            "Android >= 4.4"
+            "Chrome >= 38",
+            "Firefox >= 38",
+            "Safari >= 7",
+            "iOS >= 7",
+            "Android >= 4.4",
             "Explorer >= 10"
           ],
           "node": "6.10"
         }
       }
     ]
+  ],
+  "plugins": [
+    "syntax-flow",
+    "syntax-class-properties",
+    "syntax-object-rest-spread",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "transform-react-jsx-self",
+    "transform-react-jsx-source",
+    "transform-runtime"
   ]
 }
