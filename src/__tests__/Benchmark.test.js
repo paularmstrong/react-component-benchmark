@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import Benchmark from '../';
-import BenchmarkType from '../BenchmarkType';
+import Benchmark from '../Benchmark';
 import React from 'react';
 import { shallow } from 'enzyme';
 

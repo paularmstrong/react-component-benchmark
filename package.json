@@ -6,7 +6,9 @@
   "author": "Paul Armstrong <paul@spaceyak.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.0",
     "babel-jest": "^21.0.2",
     "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -18,7 +20,12 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^2.0.0",
+    "eslint": "^4.7.2",
+    "eslint-config-prettier": "^2.5.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.3.0",
     "flow-bin": "^0.55.0",
+    "flow-copy-source": "^1.2.1",
     "flow-typed": "^2.1.5",
     "husky": "^0.14.3",
     "jest": "^21.1.0",
@@ -35,13 +42,17 @@
     "react-dom": "15.4.x || 15.5.x || 15.6.x"
   },
   "scripts": {
-    "build": "cd src && babel *.js -d ../dist",
+    "build": "npm run build:module && npm run build:flow",
+    "build:module": "cd src && babel *.js -d ../dist",
+    "build:flow": "flow-copy-source src dist",
     "clean": "rimraf dist",
+    "lint": "eslint ./ --fix",
     "precommit": "lint-staged",
     "test": "jest"
   },
   "lint-staged": {
     "*.js": [
+      "lint",
       "prettier --write --single-quote --print-width=120",
       "git add"
     ]
@@ -64,5 +75,8 @@
     "transform": {
       "^.+\\.js$": "babel-jest"
     }
+  },
+  "dependencies": {
+    "eslint-plugin-flowtype": "^2.35.1"
   }
 }
