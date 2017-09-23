@@ -57,6 +57,11 @@
       "git add"
     ]
   },
+  "files": [
+    "dist/",
+    "LICENSE",
+    "README.md"
+  ],
   "jest": {
     "moduleFileExtensions": [
       "js"
