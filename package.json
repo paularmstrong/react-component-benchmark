@@ -46,7 +46,7 @@
     "build:module": "cd src && babel *.js -d ../dist",
     "build:flow": "flow-copy-source src dist",
     "clean": "rimraf dist",
-    "lint": "eslint ./ --fix",
+    "lint": "eslint ./",
     "precommit": "lint-staged",
     "test": "jest"
   },
