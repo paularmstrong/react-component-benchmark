@@ -109,16 +109,8 @@ export default class Benchmark extends Component<BenchmarkPropsType, BenchmarkSt
   }
 
   componentWillUpdate(nextProps: BenchmarkPropsType, nextState: BenchmarkStateType) {
-    const { type } = nextProps;
-    const { cycle, running } = nextState;
-    if (running) {
-      const now = Timing.now();
-      if (!this.state.running) {
-        this._startTime = now;
-      }
-      if (shouldRecord(cycle, type)) {
-        this._samples[cycle] = { start: now };
-      }
+    if (nextState.running && !this.state.running) {
+      this._startTime = Timing.now();
     }
   }
 
@@ -143,6 +135,10 @@ export default class Benchmark extends Component<BenchmarkPropsType, BenchmarkSt
   render() {
     const { component: Component, type } = this.props;
     const { componentProps, cycle, running } = this.state;
+    if (running && shouldRecord(cycle, type)) {
+      this._samples[cycle] = { start: Timing.now() };
+    }
+
     return running && shouldRender(cycle, type) ? (
       <div style={styles.content}>
         <Component {...componentProps} />
