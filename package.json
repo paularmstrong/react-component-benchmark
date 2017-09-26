@@ -44,9 +44,10 @@
   "scripts": {
     "build": "npm run build:module && npm run build:flow",
     "build:module": "cd src && babel *.js -d ../dist",
-    "build:flow": "flow-copy-source src dist",
+    "build:flow": "flow-copy-source -i __tests__/*.js src dist",
     "clean": "rimraf dist",
     "lint": "eslint ./",
+    "prebuild": "rimraf dist",
     "precommit": "lint-staged",
     "test": "jest"
   },
