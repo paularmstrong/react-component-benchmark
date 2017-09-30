@@ -18,6 +18,7 @@
   ],
   "plugins": [
     "syntax-flow",
+    "syntax-dynamic-import",
     "syntax-class-properties",
     "syntax-object-rest-spread",
     "transform-class-properties",
