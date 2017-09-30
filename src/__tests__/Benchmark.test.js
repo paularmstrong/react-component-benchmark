@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import Benchmark from '../Benchmark';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 class Test extends React.Component {
   render() {
@@ -26,7 +26,7 @@ describe('Benchmark', () => {
   });
 
   it('runs the given samples', () => {
-    const component = shallow(<Benchmark {...props} />);
+    const component = mount(<Benchmark {...props} />);
     component.instance().start();
     expect(props.onComplete).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -37,8 +37,9 @@ describe('Benchmark', () => {
 
   describe('results', () => {
     let results;
+
     beforeAll(() => {
-      const component = shallow(<Benchmark {...props} />);
+      const component = mount(<Benchmark {...props} />);
       component.instance().start();
       results = props.onComplete.mock.calls[0][0];
     });

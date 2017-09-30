@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import Benchmark from 'react-component-bench';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 class Test extends React.Component {
   render() {
@@ -25,19 +25,19 @@ describe('Benchmark', () => {
   });
 
   it('mounts in a reasonable amount of time', () => {
-    const component = shallow(<Benchmark {...props} />);
+    const component = mount(<Benchmark {...props} />);
     component.instance().start();
     expect(meanTime).toBeLessThan(10);
   });
 
   it('updates in a reasonable amount of time', () => {
-    const component = shallow(<Benchmark {...props} type="update" />);
+    const component = mount(<Benchmark {...props} type="update" />);
     component.instance().start();
     expect(meanTime).toBeLessThan(10);
   });
 
   it('unmounts in a reasonable amount of time', () => {
-    const component = shallow(<Benchmark {...props} type="unmount" />);
+    const component = mount(<Benchmark {...props} type="unmount" />);
     component.instance().start();
     expect(meanTime).toBeLessThan(10);
   });
