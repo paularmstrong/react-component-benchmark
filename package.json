@@ -1,6 +1,6 @@
 {
   "name": "react-component-benchmark",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A component utility for estimating benchmarks of React components",
   "main": "dist/index.js",
   "author": "Paul Armstrong <paul@spaceyak.com>",
