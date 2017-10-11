@@ -1,6 +1,6 @@
 {
   "name": "react-component-benchmark",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A component utility for estimating benchmarks of React components",
   "main": "dist/index.js",
   "author": "Paul Armstrong <paul@spaceyak.com>",
@@ -53,6 +53,7 @@
     "lint": "eslint ./",
     "prebuild": "rimraf dist",
     "precommit": "lint-staged",
+    "prepublish": "npm run build",
     "test": "jest"
   },
   "lint-staged": {
