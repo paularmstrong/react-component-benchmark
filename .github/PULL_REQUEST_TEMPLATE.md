@@ -14,4 +14,4 @@ Explain your approach. Sometimes it helps to justify your approach against some 
 
 - [ ] Add & update tests
 - [ ] Ensure CI is passing (lint, tests, flow)
-- [ ] Update relevant documentation
+- [ ] Update relevant documentation and/or examples

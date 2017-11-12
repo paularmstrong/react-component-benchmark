@@ -50,6 +50,7 @@
     "build:module": "cd src && babel *.js -d ../dist",
     "build:flow": "flow-copy-source -i __tests__/*.js src dist",
     "clean": "rimraf dist",
+    "flow": "flow",
     "lint": "eslint ./",
     "prebuild": "rimraf dist",
     "precommit": "lint-staged",

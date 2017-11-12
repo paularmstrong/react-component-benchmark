@@ -2,13 +2,17 @@
 
 This project aims to provide a method for gathering benchmarks of component tree *mount*, *update*, and *unmount* timings.
 
-Please note that the values returned are *estimates*. Since this project does not hook into the React renderer directly, the values gathered are not 100% accurate and may vary due to various other factors. That being said, running a large enough sample set should give you a confident benchmark metric.
+Please note that the values returned are *estimates*. Since this project does not hook into the React renderer directly, the values gathered are not 100% accurate and may vary slightly because they're taken from a wrapping component. That being said, running a large sample set should give you a confident benchmark metric.
 
 ## Motivation
 
 Historically, React has provided `react-addons-perf` in order to help gain insight into the performance of mounting, updating, and unmounting components. Unfortunately, as of React 16, it has been deprecated. Additionally, before deprecation, it was not usable in production React builds, making it less useful for many applications.
 
 ## Usage
+
+See the [examples](./examples) directory for ideas on how you might integrate this into your own project, whether in your [user-interface](./examples/ui/index.js) or your [automated tests](./examples/tests/jest.js).
+
+### Quick Start
 
 ```js
 import Benchmark, { BenchmarkType } from 'react-component-benchmark';
