@@ -1,5 +1,5 @@
 // @flow
-export type BenchResultsType = {
+export type BenchResultsType = {|
   startTime: number,
   endTime: number,
   runTime: number,
@@ -12,17 +12,17 @@ export type BenchResultsType = {
   stdDev: number,
   p70: number,
   p95: number,
-  p99: number
-};
+  p99: number,
+|};
 
-export type SampleTimingType = {
+export type SampleTimingType = {|
   start: number,
   end?: number,
-  elapsed?: number
-};
+  elapsed?: number,
+|};
 
-export type FullSampleTimingType = {
+export type FullSampleTimingType = {|
   start: number,
   end: number,
-  elapsed: number
-};
+  elapsed: number,
+|};
