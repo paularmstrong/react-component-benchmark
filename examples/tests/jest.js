@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import Benchmark from 'react-component-bench';
+import Benchmark from 'react-component-benchmark';
 import React from 'react';
 import { mount } from 'enzyme';
 
