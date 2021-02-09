@@ -1,6 +1,8 @@
 [ignore]
-.*/node_modules/.*
 .*/dist/.*
+
+[declarations]
+.*/node_modules/.*
 
 [include]
 

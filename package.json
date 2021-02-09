@@ -6,62 +6,53 @@
   "author": "Paul Armstrong <paul@spaceyak.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.0",
-    "babel-jest": "^21.0.2",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-syntax-flow": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx-self": "^6.22.0",
-    "babel-plugin-transform-react-jsx-source": "^6.22.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "enzyme": "^3.0.0",
-    "enzyme-adapter-react-16": "^1.0.0",
-    "enzyme-to-json": "^3.0.0",
-    "eslint": "^4.7.2",
-    "eslint-config-prettier": "^2.5.0",
-    "eslint-plugin-flowtype": "^2.35.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^7.3.0",
-    "flow-bin": "^0.55.0",
-    "flow-copy-source": "^1.2.1",
-    "flow-typed": "^2.1.5",
-    "husky": "^0.14.3",
-    "jest": "^21.2.1",
-    "lint-staged": "^4.2.2",
-    "mkdirp": "^0.5.1",
-    "prettier": "^1.7.0",
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@babel/eslint-parser": "^7.12.13",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-flow": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "@testing-library/react": "^11.2.5",
+    "esbuild": "^0.8.43",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-react": "^7.22.0",
+    "flow-bin": "^0.144.0",
+    "flow-copy-source": "^2.0.9",
+    "flow-typed": "^3.2.1",
+    "husky": "^5.0.9",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "mkdirp": "^1.0.4",
+    "prettier": "^2.2.1",
     "raf": "^3.3.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-test-renderer": "^16.0.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^3.0.2"
   },
   "peerDependencies": {
-    "react": ">= 15.4.0 < 16.0.0 || ^16.0.0",
-    "react-dom": ">= 15.4.0 < 16.0.0 || ^16.0.0"
+    "react": ">= 16.8.0"
   },
   "scripts": {
     "build": "npm run build:module && npm run build:flow",
-    "build:module": "cd src && babel *.js -d ../dist",
+    "build:module": "cd src && babel *.js -d ../dist --root-mode=upward",
     "build:flow": "flow-copy-source -i __tests__/*.js src dist",
     "clean": "rimraf dist",
     "flow": "flow",
     "lint": "eslint ./",
     "prebuild": "rimraf dist",
     "precommit": "lint-staged",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "jest"
   },
   "lint-staged": {
     "*.js": [
-      "lint",
-      "prettier --write --single-quote --print-width=120",
-      "git add"
+      "yarn lint",
+      "yarn prettier --write --single-quote --print-width=120"
     ]
   },
   "files": [
@@ -78,18 +69,8 @@
     "roots": [
       "<rootDir>"
     ],
-    "setupTestFrameworkScriptFile": "./scripts/setup-jest.js",
-    "setupFiles": [
-      "raf/polyfill"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
     "testEnvironment": "jsdom",
-    "testRegex": "/__tests__/.*\\.test\\.js$",
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    }
+    "testRegex": "/__tests__/.*\\.test\\.js$"
   },
   "dependencies": {}
 }
