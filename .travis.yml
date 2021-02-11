@@ -1,9 +1,0 @@
-cache: yarn
-language: node_js
-node_js:
-  - "6"
-script:
-  - yarn lint
-  - yarn flow
-  - yarn test
-  - yarn build

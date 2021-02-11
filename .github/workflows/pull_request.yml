@@ -1,0 +1,52 @@
+name: On pull request
+
+on: pull_request
+
+jobs:
+  job_lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 14
+      - run: yarn
+      - name: Lint
+        run: yarn lint:cmd
+
+  job_build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 14
+      - run: yarn
+      - name: Build
+        run: yarn build
+
+  job_test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 14
+      - run: yarn
+      - name: Test
+        run: yarn test
+
+  job_flow:
+    name: Flow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 14
+      - run: yarn
+      - name: Flow
+        run: yarn flow

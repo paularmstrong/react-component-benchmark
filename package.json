@@ -43,7 +43,8 @@
     "build:flow": "flow-copy-source -i __tests__/*.js src dist",
     "clean": "rimraf dist",
     "flow": "flow",
-    "lint": "eslint ./",
+    "lint": "yarn lint:cmd --fix",
+    "lint:cmd": "eslint ./",
     "prebuild": "rimraf dist",
     "precommit": "lint-staged",
     "prepublishOnly": "npm run build",
@@ -51,8 +52,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "yarn lint",
-      "yarn prettier --write --single-quote --print-width=120"
+      "yarn lint"
     ]
   },
   "files": [
@@ -60,17 +60,5 @@
     "LICENSE",
     "README.md"
   ],
-  "jest": {
-    "moduleFileExtensions": [
-      "js"
-    ],
-    "name": "react-component-benchmark",
-    "resetMocks": true,
-    "roots": [
-      "<rootDir>"
-    ],
-    "testEnvironment": "jsdom",
-    "testRegex": "/__tests__/.*\\.test\\.js$"
-  },
   "dependencies": {}
 }

@@ -39,11 +39,11 @@ const initialState: State = {
 
 // | 'START_SAMPLE' | 'END_SAMPLE' | 'TICK' | 'END'
 type Action =
-  | {| type: 'START', payload: number |}
-  | {| type: 'START_SAMPLE', payload: number |}
-  | {| type: 'END_SAMPLE', payload: number |}
-  | {| type: 'TICK' |}
-  | {| type: 'END' |};
+  | {| type: 'START', payload: number, |}
+  | {| type: 'START_SAMPLE', payload: number, |}
+  | {| type: 'END_SAMPLE', payload: number, |}
+  | {| type: 'TICK', |}
+  | {| type: 'END', |};
 
 function reducer(state: State = initialState, action: Action) {
   // console.log(action);
@@ -165,7 +165,7 @@ function Benchmark(
       dispatch({ type: 'END' });
 
       const runTime = endTime - startTime;
-      const sortedElapsedTimes = samples.map(({ elapsed }: { elapsed: number }): number => elapsed).sort(sortNumbers);
+      const sortedElapsedTimes = samples.map(({ elapsed }: { elapsed: number, }): number => elapsed).sort(sortNumbers);
       const mean = getMean(sortedElapsedTimes);
       const stdDev = getStdDev(sortedElapsedTimes);
 
@@ -218,6 +218,6 @@ function Benchmark(
   );
 }
 
-export type BenchmarkRef = {| start: () => void |};
+export type BenchmarkRef = {| start: () => void, |};
 
 export default (React.forwardRef<Props, BenchmarkRef>(Benchmark): React.AbstractComponent<Props, *>);
