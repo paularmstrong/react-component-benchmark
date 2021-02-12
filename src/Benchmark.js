@@ -39,14 +39,13 @@ const initialState: State = {
 
 // | 'START_SAMPLE' | 'END_SAMPLE' | 'TICK' | 'END'
 type Action =
-  | {| type: 'START', payload: number, |}
-  | {| type: 'START_SAMPLE', payload: number, |}
-  | {| type: 'END_SAMPLE', payload: number, |}
-  | {| type: 'TICK', |}
-  | {| type: 'END', |};
+  | {| type: 'START', payload: number |}
+  | {| type: 'START_SAMPLE', payload: number |}
+  | {| type: 'END_SAMPLE', payload: number |}
+  | {| type: 'TICK' |}
+  | {| type: 'END' |};
 
 function reducer(state: State = initialState, action: Action) {
-  // console.log(action);
   switch (action.type) {
     case 'START':
       return {
@@ -57,7 +56,7 @@ function reducer(state: State = initialState, action: Action) {
 
     case 'START_SAMPLE': {
       const samples = [...state.samples];
-      samples.push({ start: action.payload, end: -1, elapsed: -1 });
+      samples.push({ start: action.payload, end: -Infinity, elapsed: -Infinity });
       return {
         ...state,
         samples,
@@ -133,7 +132,7 @@ function Benchmark(
         return !((cycle + 1) % 2);
       // Record every iteration
       case BenchmarkType.UPDATE:
-        return true;
+        return cycle !== 0;
       // Record every even iteration (when unmounted)
       case BenchmarkType.UNMOUNT:
         return !(cycle % 2);
@@ -165,7 +164,7 @@ function Benchmark(
       dispatch({ type: 'END' });
 
       const runTime = endTime - startTime;
-      const sortedElapsedTimes = samples.map(({ elapsed }: { elapsed: number, }): number => elapsed).sort(sortNumbers);
+      const sortedElapsedTimes = samples.map(({ elapsed }: { elapsed: number }): number => elapsed).sort(sortNumbers);
       const mean = getMean(sortedElapsedTimes);
       const stdDev = getStdDev(sortedElapsedTimes);
 
@@ -195,7 +194,7 @@ function Benchmark(
 
     const now = Timing.now();
 
-    if (shouldRecord && !samples[samples.length - 1].end) {
+    if (shouldRecord && samples[samples.length - 1].end < 0) {
       dispatch({ type: 'END_SAMPLE', payload: now });
       return;
     }
@@ -218,6 +217,6 @@ function Benchmark(
   );
 }
 
-export type BenchmarkRef = {| start: () => void, |};
+export type BenchmarkRef = {| start: () => void |};
 
 export default (React.forwardRef<Props, BenchmarkRef>(Benchmark): React.AbstractComponent<Props, *>);
