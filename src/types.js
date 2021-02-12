@@ -15,12 +15,6 @@ export type BenchResultsType = {|
   p99: number,
 |};
 
-export type SampleTimingType = {|
-  start: number,
-  end?: number,
-  elapsed?: number,
-|};
-
 export type FullSampleTimingType = {|
   start: number,
   end: number,

@@ -5,7 +5,7 @@ import BenchmarkType from '../BenchmarkType';
 import { act, render, waitFor } from '@testing-library/react';
 import type { FullSampleTimingType } from '../types';
 
-type Props = {| testID: number, |};
+type Props = {| testID: number |};
 
 function Test({ testID }: Props) {
   return <div id={testID}>hello</div>;

@@ -110,7 +110,7 @@ module.exports = {
     // flow
     'flowtype/boolean-style': ['error', 'boolean'],
     'flowtype/define-flow-type': 'error',
-    'flowtype/delimiter-dangle': ['error', 'always'],
+    'flowtype/delimiter-dangle': ['error', 'always-multiline'],
     'flowtype/generic-spacing': 'off',
     'flowtype/no-primitive-constructor-types': 'error',
     'flowtype/no-types-missing-file-annotation': 'off',
