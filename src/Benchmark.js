@@ -147,7 +147,7 @@ function Benchmark(
       case BenchmarkType.UNMOUNT:
         return cycle >= numSamples * 2 - 1;
       case BenchmarkType.UPDATE:
-        return cycle >= numSamples - 1;
+        return cycle >= numSamples;
       default:
         return true;
     }
