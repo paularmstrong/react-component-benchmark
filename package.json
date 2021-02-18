@@ -1,8 +1,9 @@
 {
   "name": "react-component-benchmark",
-  "version": "0.0.4",
+  "version": "0.0.0-hooks.alpha.1",
   "description": "A component utility for estimating benchmarks of React components",
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist",
   "author": "Paul Armstrong <paul@spaceyak.com>",
   "license": "MIT",
   "devDependencies": {
@@ -38,9 +39,10 @@
     "react": ">= 16.8.0"
   },
   "scripts": {
-    "build": "npm run build:module && npm run build:flow",
-    "build:module": "cd src && babel *.js -d ../dist --root-mode=upward",
-    "build:flow": "flow-copy-source -i __tests__/*.js src dist",
+    "build": "npm run build:module && npm run build:cjs && npm run build:flow",
+    "build:module": "cd src && BUILD_TARGETS=esmodules babel *.js -d ../dist --root-mode=upward",
+    "build:cjs": "cd src && BUILD_TARGETS=defaults babel *.js -d ../dist/cjs --root-mode=upward",
+    "build:flow": "flow-copy-source -i __tests__/*.js src dist && flow-copy-source -i __tests__/*.js src dist/cjs",
     "clean": "rimraf dist",
     "flow": "flow",
     "lint": "yarn lint:cmd --fix",
