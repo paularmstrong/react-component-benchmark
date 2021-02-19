@@ -37,13 +37,12 @@ const initialState: State = {
   samples: [],
 };
 
-// | 'START_SAMPLE' | 'END_SAMPLE' | 'TICK' | 'END'
 type Action =
   | {| type: 'START', payload: number |}
   | {| type: 'START_SAMPLE', payload: number |}
   | {| type: 'END_SAMPLE', payload: number |}
   | {| type: 'TICK' |}
-  | {| type: 'END' |};
+  | {| type: 'RESET' |};
 
 function reducer(state: State = initialState, action: Action) {
   switch (action.type) {
@@ -80,11 +79,8 @@ function reducer(state: State = initialState, action: Action) {
         cycle: state.cycle + 1,
       };
 
-    case 'END':
-      return {
-        ...state,
-        running: false,
-      };
+    case 'RESET':
+      return initialState;
 
     default:
       return state;
@@ -161,8 +157,6 @@ function Benchmark(
 
   const handleComplete = React.useCallback(
     (endTime: number) => {
-      dispatch({ type: 'END' });
-
       const runTime = endTime - startTime;
       const sortedElapsedTimes = samples.map(({ elapsed }: { elapsed: number }): number => elapsed).sort(sortNumbers);
       const mean = getMean(sortedElapsedTimes);
@@ -183,6 +177,8 @@ function Benchmark(
         p95: mean + stdDev * 2,
         p99: mean + stdDev * 3,
       });
+
+      dispatch({ type: 'RESET' });
     },
     [onComplete, samples, startTime]
   );
@@ -210,11 +206,9 @@ function Benchmark(
     }
   }, [running, isDone, samples, shouldRecord, shouldRender, timeout]);
 
-  return (
-    <div style={styles.content}>
-      {running && shouldRender ? <Component {...componentProps} testID={cycle} /> : null}
-    </div>
-  );
+  const props = type === BenchmarkType.MOUNT ? { ...componentProps, key: cycle } : componentProps;
+
+  return <div style={styles.content}>{running && shouldRender ? <Component {...props} /> : null}</div>;
 }
 
 export type BenchmarkRef = {| start: () => void |};
