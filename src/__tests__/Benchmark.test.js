@@ -3,7 +3,7 @@ import * as React from 'react';
 import Benchmark, { type BenchmarkRef } from '../Benchmark';
 import BenchmarkType from '../BenchmarkType';
 import { act, render, waitFor } from '@testing-library/react';
-import type { FullSampleTimingType } from '../types';
+import type { Sample } from '../types';
 
 type Props = {| testID: number |};
 
@@ -78,10 +78,11 @@ describe('new', () => {
     test('includes an array for samples', () => {
       expect(results).toHaveProperty('samples');
       expect(Array.isArray(results.samples)).toBe(true);
-      results.samples.forEach((sample: FullSampleTimingType) => {
+      results.samples.forEach((sample: Sample) => {
         expect(sample).toHaveProperty('start');
         expect(sample).toHaveProperty('end');
         expect(sample).toHaveProperty('elapsed');
+        expect(sample).toHaveProperty('layout');
       });
     });
   });

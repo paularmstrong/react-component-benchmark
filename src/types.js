@@ -1,10 +1,6 @@
 // @flow
-export type BenchResultsType = {|
-  startTime: number,
-  endTime: number,
-  runTime: number,
-  sampleCount: number,
-  samples: Array<FullSampleTimingType>,
+
+type ComputedResult = {|
   max: number,
   min: number,
   median: number,
@@ -15,8 +11,19 @@ export type BenchResultsType = {|
   p99: number,
 |};
 
-export type FullSampleTimingType = {|
+export type BenchResultsType = {|
+  startTime: number,
+  endTime: number,
+  runTime: number,
+  sampleCount: number,
+  samples: Array<Sample>,
+  ...ComputedResult,
+  layout?: ComputedResult,
+|};
+
+export type Sample = {|
   start: number,
   end: number,
   elapsed: number,
+  layout: number,
 |};
