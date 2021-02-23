@@ -11,11 +11,48 @@ function slowFibonacci(num) {
   return slowFibonacci(num - 1) + slowFibonacci(num - 2);
 }
 
-describe('Benchmark', () => {
-  beforeEach(() => {
-    jest.useRealTimers();
-  });
+/**
+ * A wrapper function to make benchmarking in tests a bit more reusable.
+ * You might tune this to your specific needs
+ * @param  {React.Component} options.component  The component you'd like to benchmark
+ * @param  {Object} options.props               Props for your component
+ * @param  {Number} options.samples             Number of samples to take. default 50 is a safe number
+ * @param  {String} options.type                Lifecycle of a component ('mount', 'update', or 'unmount')
+ * @return {Object}                             Results object
+ */
+async function runBenchmark({ component, props, samples = 50, type }) {
+  // Benchmarking requires a real time system and not mocks. Ensure you're not using fake timers
+  jest.useRealTimers();
 
+  return new Promise(async (resolve, reject) => {
+    const ref = React.createRef();
+
+    let results;
+    const handleComplete = jest.fn((res) => {
+      results = res;
+    });
+
+    render(
+      <Benchmark
+        component={component}
+        onComplete={handleComplete}
+        ref={ref}
+        samples={samples}
+        componentProps={props}
+        type={type}
+      />
+    );
+
+    act(() => {
+      ref.current.start();
+    });
+
+    await waitFor(() => expect(handleComplete).toHaveBeenCalled(), { timeout: 10000 });
+    resolve(results);
+  });
+}
+
+describe('Benchmark', () => {
   test('mounts slowly', async () => {
     function SlowMount() {
       // Running a slow calculation on mount
@@ -23,18 +60,7 @@ describe('Benchmark', () => {
       return <div>{JSON.stringify(fib)}</div>;
     }
 
-    const ref = React.createRef();
-    let results;
-
-    const handleComplete = jest.fn((res) => {
-      results = res;
-    });
-    render(<Benchmark component={SlowMount} onComplete={handleComplete} ref={ref} samples={20} />);
-    act(() => {
-      ref.current.start();
-    });
-
-    await waitFor(() => expect(handleComplete).toHaveBeenCalled(), { timeout: 10000 });
+    const results = await runBenchmark({ component: SlowMount });
     expect(results.mean).toBeGreaterThan(10);
   });
 
@@ -45,17 +71,8 @@ describe('Benchmark', () => {
       return <div>{JSON.stringify(fib)}</div>;
     }
 
-    const ref = React.createRef();
-    let results;
-    const handleComplete = jest.fn((res) => {
-      results = res;
-    });
-    render(<Benchmark component={FastMount} onComplete={handleComplete} ref={ref} samples={20} />);
-    act(() => {
-      ref.current.start();
-    });
+    const results = await runBenchmark({ component: FastMount });
 
-    await waitFor(() => expect(handleComplete).toHaveBeenCalled(), { timeout: 10000 });
     expect(results.mean).toBeLessThan(4);
   });
 
@@ -66,18 +83,8 @@ describe('Benchmark', () => {
       return <div>{JSON.stringify(fib)}</div>;
     }
 
-    const ref = React.createRef();
-    let results;
+    const results = await runBenchmark({ component: SlowUpdate, type: 'update' });
 
-    const handleComplete = jest.fn((res) => {
-      results = res;
-    });
-    render(<Benchmark component={SlowUpdate} onComplete={handleComplete} ref={ref} samples={20} type="update" />);
-    act(() => {
-      ref.current.start();
-    });
-
-    await waitFor(() => expect(handleComplete).toHaveBeenCalled(), { timeout: 10000 });
     expect(results.mean).toBeGreaterThan(10);
   });
 
@@ -87,18 +94,9 @@ describe('Benchmark', () => {
       const fib = React.useMemo(() => slowFibonacci(32), []);
       return <div>{JSON.stringify(fib)}</div>;
     }
-    const ref = React.createRef();
-    let results;
 
-    const handleComplete = jest.fn((res) => {
-      results = res;
-    });
-    render(<Benchmark component={FastUpdates} onComplete={handleComplete} ref={ref} samples={20} type="update" />);
-    act(() => {
-      ref.current.start();
-    });
+    const results = await runBenchmark({ component: FastUpdates, type: 'update' });
 
-    await waitFor(() => expect(handleComplete).toHaveBeenCalled(), { timeout: 10000 });
     expect(results.mean).toBeLessThan(4);
   });
 
@@ -113,18 +111,8 @@ describe('Benchmark', () => {
       return <div />;
     }
 
-    const ref = React.createRef();
-    let results;
+    const results = await runBenchmark({ component: SlowUnmount, type: 'unmount' });
 
-    const handleComplete = jest.fn((res) => {
-      results = res;
-    });
-    render(<Benchmark component={SlowUnmount} onComplete={handleComplete} ref={ref} samples={20} type="unmount" />);
-    act(() => {
-      ref.current.start();
-    });
-
-    await waitFor(() => expect(handleComplete).toHaveBeenCalled(), { timeout: 10000 });
     expect(results.mean).toBeGreaterThan(10);
   });
 
@@ -133,17 +121,8 @@ describe('Benchmark', () => {
       return <div />;
     }
 
-    const ref = React.createRef();
-    let results;
-    const handleComplete = jest.fn((res) => {
-      results = res;
-    });
-    render(<Benchmark component={FastUnmount} onComplete={handleComplete} ref={ref} samples={20} type="unmount" />);
-    act(() => {
-      ref.current.start();
-    });
+    const results = await runBenchmark({ component: FastUnmount, type: 'unmount' });
 
-    await waitFor(() => expect(handleComplete).toHaveBeenCalled(), { timeout: 10000 });
     expect(results.mean).toBeLessThan(4);
   });
 });
