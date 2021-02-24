@@ -51,8 +51,8 @@ See [examples/tests](./examples/tests/) for various test integrations.
 
 ### Build a UI
 
-- Demo: https://csb-uy88d.netlify.app/
-  - See, edit, and fork the code from https://codesandbox.io/s/react-component-benchmark-uy88d
+- Demo: https://react-component-benchmark.vercel.app/
+  - See, edit, and fork the code from [paularmstrong/react-component-benchmark-example](https://github.com/paularmstrong/react-component-benchmark-example) or [codesandbox](https://codesandbox.io/s/react-component-benchmark-uy88d)
   - You can also do the same using Preact! https://codesandbox.io/s/react-component-benchmark-preact-69inw
 
 ### Benchmark props
