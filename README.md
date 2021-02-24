@@ -1,4 +1,4 @@
-# React Component Benchmark [![Build Status](https://img.shields.io/travis/paularmstrong/react-component-benchmark/master.svg?style=flat-square)](https://travis-ci.org/paularmstrong/react-component-benchmark)
+# React Component Benchmark [![NPM version](https://img.shields.io/npm/v/react-component-benchmark?style=flat-square)](https://www.npmjs.com/package/react-component-benchmarkhttps://www.npmjs.com/package/react-component-benchmark) [![CI status](https://img.shields.io/github/checks-status/paularmstrong/react-component-benchmark/main?style=flat-square)](https://github.com/paularmstrong/react-component-benchmark/actions)
 
 This project aims to provide a method for gathering benchmarks of component tree _mount_, _update_, and _unmount_ timings.
 
