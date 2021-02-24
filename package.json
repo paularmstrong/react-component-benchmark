@@ -1,6 +1,6 @@
 {
   "name": "react-component-benchmark",
-  "version": "0.0.0-hooks.alpha.10",
+  "version": "1.0.0",
   "description": "A component utility for estimating benchmarks of React components",
   "main": "dist/cjs/index.js",
   "module": "dist",
