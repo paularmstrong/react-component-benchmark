@@ -4,6 +4,7 @@
   "description": "A component utility for estimating benchmarks of React components",
   "main": "dist/cjs/index.js",
   "module": "dist",
+  "types": "index.d.ts",
   "author": "Paul Armstrong <paul@spaceyak.com>",
   "license": "MIT",
   "devDependencies": {
