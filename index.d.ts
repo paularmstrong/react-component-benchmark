@@ -34,8 +34,8 @@ export interface BenchResultsType extends ComputedResult {
 }
 
 export interface BenchmarkProps {
-    component: ComponentType;
-    componentProps?: {};
+    component: ComponentType<any>;
+    componentProps?: any;
     includeLayout?: boolean;
     onComplete: (res: BenchResultsType) => void;
     samples: number;
