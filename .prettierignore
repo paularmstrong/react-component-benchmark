@@ -1,0 +1,8 @@
+.git
+.yarn
+node_modules/*
+dist
+.next
+
+*.tsbuildinfo
+*.d.ts.map

@@ -1,7 +1,17 @@
 .DS_Store
 
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
 node_modules/*
 dist/*
 *.log
 coverage/*
 .coveralls.yml
+
+*.tsbuildinfo
+*.d.ts.map

@@ -22,7 +22,7 @@ Here's what I expect to see when I run the above:
 // insert output here
 ```
 
-Here's what I *actually* see when I run the above:
+Here's what I _actually_ see when I run the above:
 
 ```js
 // insert expectation here
