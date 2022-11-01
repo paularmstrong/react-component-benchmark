@@ -1,65 +1,30 @@
-import Benchmark, { BenchmarkType } from 'react-component-benchmark';
-import React, { Component } from 'react';
-import { string } from 'prop-types';
+import * as React from 'react';
+import { Benchmark, BenchmarkType } from 'react-component-benchmark';
 
-class MyComponent extends Component {
-	static propTypes = {
-		title: string,
-	};
+export function MyComponentBenchmark() {
+	const ref = React.useRef();
 
-	render() {
-		return <div>{/* ... */}</div>;
-	}
-}
-
-export default class MyComponentBenchmark extends Component {
-	constructor(props, context) {
-		super(props, context);
-		this.state = {
-			benchmarkType: BenchmarkType.MOUNT,
-		};
-	}
-
-	render() {
-		const { benchmarkType } = this.state;
-
-		return (
-			<div>
-				<button onClick={this._handleStart}>Run</button>
-				<select onChange={this._handleChangeType}>
-					{Object.values(BenchmarkType).map((benchType) => (
-						<option key={benchType} value={benchType}>
-							{benchType}
-						</option>
-					))}
-				</select>
-				<Benchmark
-					component={MyComponent}
-					componentProps={{ title: 'foobar' }}
-					onComplete={this._handleComplete}
-					ref={this._setBenchRef}
-					samples={50}
-					timeout={10000}
-					type={benchmarkType}
-				/>
-			</div>
-		);
-	}
-
-	_handleStart = () => {
-		this._benchmarkRef.start();
-	};
-
-	_handleChangeType = (event) => {
-		this.setState({ benchmarkType: event.target.value });
-	};
-
-	_handleComplete = (results) => {
+	const handleComplete = React.useCallback((results) => {
 		// eslint-disable-next-line no-console
 		console.log(results);
+	}, []);
+
+	const handleStart = () => {
+		ref.start();
 	};
 
-	_setBenchRef = (ref) => {
-		this._benchmarkRef = ref;
-	};
+	return (
+		<div>
+			<button onClick={handleStart}>Run</button>
+			<Benchmark
+				component={MyComponent}
+				componentProps={componentProps}
+				onComplete={handleComplete}
+				ref={ref}
+				samples={50}
+				timeout={10000}
+				type={BenchmarkType.MOUNT}
+			/>
+		</div>
+	);
 }
