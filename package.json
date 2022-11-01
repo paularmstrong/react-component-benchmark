@@ -14,7 +14,20 @@
 	"homepage": "https://github.com/paularmstrong/react-component-benchmark",
 	"author": "Paul Armstrong <paul@spaceyak.com>",
 	"license": "MIT",
+	"scripts": {
+		"prebuild": "rimraf dist",
+		"build": "node scripts/build.mjs",
+		"clean": "rimraf dist",
+		"lint": "yarn lint:cmd --fix",
+		"lint:cmd": "eslint ./",
+		"format": "prettier --ignore-unknown",
+		"pre-release": "release-it --preRelease=alpha",
+		"release": "release-it",
+		"test": "jest",
+		"tsc:check": "tsc -p tsconfig.check.json"
+	},
 	"devDependencies": {
+		"@release-it/conventional-changelog": "^5.1.1",
 		"@testing-library/react": "^13.4.0",
 		"@types/jest": "^29.2.0",
 		"@types/node": "^18.11.7",
@@ -36,26 +49,12 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-test-renderer": "^18.2.0",
+		"release-it": "^15.5.0",
 		"rimraf": "^3.0.2",
 		"typescript": "^4.8.4"
 	},
 	"peerDependencies": {
 		"react": "^18"
-	},
-	"scripts": {
-		"prebuild": "rimraf dist",
-		"build": "node scripts/build.mjs",
-		"clean": "rimraf dist",
-		"lint": "yarn lint:cmd --fix",
-		"lint:cmd": "eslint ./",
-		"format": "prettier --ignore-unknown",
-		"test": "jest",
-		"tsc:check": "tsc -p tsconfig.check.json"
-	},
-	"lint-staged": {
-		"*.js": [
-			"yarn lint"
-		]
 	},
 	"files": [
 		"dist/",
