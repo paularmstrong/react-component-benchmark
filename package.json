@@ -1,6 +1,6 @@
 {
 	"name": "react-component-benchmark",
-	"version": "2.0.0-alpha.1",
+	"version": "2.0.0",
 	"description": "A component utility for estimating benchmarks of React components",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
