@@ -5,7 +5,7 @@
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
 	"source": "./src/index.ts",
-	"tyes": "./dist/src/index.d.ts",
+	"types": "./dist/src/index.d.ts",
 	"sideEffects": false,
 	"repository": {
 		"type": "git",
