@@ -15,7 +15,7 @@ See the [examples](./examples) directory for ideas on how you might integrate th
 ### Quick Start
 
 ```js
-import { Benchmark, BenchmarkType } from 'react-component-benchmark';
+import { Benchmark } from 'react-component-benchmark';
 
 function MyComponentBenchmark() {
 	const ref = React.useRef();
@@ -38,7 +38,7 @@ function MyComponentBenchmark() {
 				ref={ref}
 				samples={50}
 				timeout={10000}
-				type={BenchmarkType.MOUNT}
+				type="mount"
 			/>
 		</div>
 	);
