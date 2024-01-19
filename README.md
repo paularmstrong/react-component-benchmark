@@ -25,7 +25,7 @@ function MyComponentBenchmark() {
 	}, []);
 
 	const handleStart = () => {
-		ref.start();
+		ref.current.start();
 	};
 
 	return (
